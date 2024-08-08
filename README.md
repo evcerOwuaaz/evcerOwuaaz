@@ -1,6 +1,6 @@
 - 👋 Hi, I’m @evcerOwuaaz
 - 👀 Personally interested in learning about 2D Game Development, but not really sure what to actually do as a full time job :)
-- 🌱 I have learnt a little bit of C, currently learning Java
+- 🌱 I have learnt a little bit of C, a little bit of Java, currently learning C++
 
 
 <!---
