@@ -1,0 +1,387 @@
+import java.util.concurrent.TimeUnit;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+
+import java.io.IOException;
+
+
+public class App {
+
+    public static void main(String[] args) throws Exception {
+
+        Scanner scanner = new Scanner(System.in);
+
+        String Story1, CharacterName,characterselectMessage,Story2,RobedFigureGive,defensiveitem="",Offensiveitem="",Room1,room2text;
+
+        int classSelect=-1;
+
+        characterselectMessage= ", Such a wonderful name.";
+
+        Story1="It's year 202x, a girl was wandering around the \nLake of Kuvira to which she trips on a vine\nAnd falls into it. Drowning her to the depths that seems endless\n\n But the lake of Kuvira is not any ordinary one. This Lake Grants a wish after the soul has reached the immortal world.\n Her past is now erased from her memory. It's Upon You to Guide her way and help make her decisions.\n";
+
+      DisplayWithdelay(Story1, TimeUnit.MILLISECONDS, 10);
+
+    
+
+    System.out.println("What's her name?");
+
+    System.out.print("Name:");
+    CharacterName = scanner.nextLine();
+  
+    
+
+    DisplayWithdelay(CharacterName+characterselectMessage, TimeUnit.MILLISECONDS, 10);
+
+    
+
+    System.out.println("Which class do You think matches with her personality?");
+
+    DisplayWithdelay("1. Knight\n2. Wizard\n3. Archer\n", TimeUnit.MILLISECONDS, 10);
+while(true){try{
+    System.out.print("Class:");
+   classSelect=scanner.nextInt();
+
+if(classSelect<1||classSelect>3){
+    System.out.println("Please enter a value within 1 and 3");
+    continue;
+}
+break;
+}
+
+   
+catch(InputMismatchException ex){
+    System.out.println("Please input a number within 1-3");
+    scanner.next();
+}}
+Knight k1 = new Knight(100, "Sword", "Sheild", 20);
+
+Archer a1 = new Archer(70, "Arrows", "Cloak", 40);
+Wizard w1 = new Wizard(120, "Wand", "SpellBook", 50) ;
+
+player p1;
+switch (classSelect) {
+
+    case 1:
+p1 = new player(CharacterName, "Knight", k1.getHealth(),k1.getSpecialdamage());
+        break;
+    case 2:
+
+    p1 = new player(CharacterName, "Wizard", w1.getHealth(),w1.getSpecialdamage());
+    break;
+
+   case 3:
+  p1 = new player(CharacterName, "Archer", a1.getHealth(),a1.getSpecialdamage());
+    break;
+        default:
+     p1 = new player("", "", 0,0);
+        break;
+   }
+   
+  
+   DisplayWithdelay("A "+p1.getType()+", Splendid!", TimeUnit.MILLISECONDS, 5);
+
+   DisplayWithdelay(" Well then, you are with "+p1.getName()+" now. Help her reach the end...\n", TimeUnit.MILLISECONDS, 5);
+
+System.out.print("\n");
+
+
+
+
+
+
+Story2 = p1.getName()+", the "+p1.getType()+ " wakes up. She sees a robed figure fixated at her.\n \"Don't worry my child, I have been taking care of you ever since you've fallen.\n But I fear you don't have much time. The Lake has granted you a second Life. Seek what's at the end of the dungeon.\n ";
+
+DisplayWithdelay(Story2, TimeUnit.MILLISECONDS, 5);
+RobedFigureGive = p1.getName()+" was about to enter, but was interrupted by the Robed Figure.\n \"Before you leave, have these to defend yourself.";
+
+switch(classSelect){
+    case 1:
+Offensiveitem=k1.getWeapon();
+defensiveitem=k1.getdefense();
+break;
+case 2:
+Offensiveitem=w1.getWeapon();
+defensiveitem=w1.getdefense();
+break;
+case 3: 
+Offensiveitem=a1.getWeapon();
+defensiveitem=a1.getdefense();
+break;
+}
+
+
+
+DisplayWithdelay(RobedFigureGive, TimeUnit.MILLISECONDS, 5);
+System.out.println("\n"+Offensiveitem+ " and "+defensiveitem+ " obtained!");
+
+
+ Saving(p1, Offensiveitem, defensiveitem, p1.gethealth());
+
+Monsters goblin1 = new Monsters(56, 20, "Spears", "Small Goblin");
+Room1=p1.getName()+" enters the dark room and gets ambushed by a "+goblin1.getMonsterNAme()+"\n";
+DisplayWithdelay(Room1, TimeUnit.MILLISECONDS, 5);
+
+Combat(p1, goblin1, scanner, Offensiveitem,goblin1.gettypeOfWeapon());
+
+   
+Monsters sm = new Monsters(20, 12, "Poison", "Swamp Monster");
+room2text = p1.getName()+" pushes through the second room and encounters "+sm.getMonsterNAme()+"\n";
+           DisplayWithdelay(room2text, TimeUnit.MILLISECONDS, 5);
+ if(p1.gethealth()<=0) {p1.deathmessage();}
+ else{Combat(p1, sm, scanner, Offensiveitem, sm.gettypeOfWeapon());}  
+ 
+Saving(p1, Offensiveitem, defensiveitem, p1.gethealth());
+
+
+
+////////////////////
+    }
+    
+
+
+
+    public static void DisplayWithdelay(String Story, TimeUnit unit, long time)throws InterruptedException{
+
+for(char ch : Story.toCharArray()){
+
+    System.out.print(ch);
+
+    unit.sleep(time);}
+
+}
+
+public static void Combat(player p1,Monsters goblin1,Scanner scanner, String Offensiveitem, String Monsterweapon){
+    int choice =-1;
+    while(p1.gethealth()>0&&goblin1.getMonsterHealth()>0){
+        int playerhealth=p1.takeDamage(goblin1.getMonsterDamage()),monsterhealth=goblin1.getMonsterHurt(p1.getSpecialdamage());
+        System.out.println(p1.getName()+"\'s Turn:");
+        System.out.println("1. Attack\n2.Spare");
+
+
+
+        while(true){try{
+            System.out.print("Choice:");
+           choice=scanner.nextInt();
+        
+        if(choice<1||choice>2){
+            System.out.println("Please enter a value within 1 and 2");
+            continue;
+        }
+        break;
+        }
+        
+           
+        catch(InputMismatchException ex){
+            System.out.println("Please input a number within 1-3");
+            scanner.next();
+        }}
+
+
+        
+       if(choice==1){
+                    System.out.println(p1.getName()+" attacked with "+Offensiveitem+" Dealt "+p1.getSpecialdamage()+" damage");
+                    System.out.println(goblin1.getMonsterNAme()+" took "+p1.getSpecialdamage()+ " damage. Has " +goblin1.getMonsterHurt(p1.getSpecialdamage())+ " health");
+                }
+                else if(choice==2){
+                    System.out.println(goblin1.getMonsterNAme()+" is spared");
+                  
+                   break;
+                }
+                 
+                 if(monsterhealth<=0){
+                    System.out.println(goblin1.getMonsterNAme()+ " is defeated");
+                    break;
+            }  else{System.out.println(goblin1.getMonsterNAme()+" attacked with "+goblin1.gettypeOfWeapon()+" Dealt "+goblin1.getMonsterDamage()+" damage");
+                        System.out.println(p1.getName()+" took "+goblin1.getMonsterDamage()+ " damage. Has " + p1.takeDamage(goblin1.getMonsterDamage())+ " health");
+                if(playerhealth<=0){
+                System.out.println(p1.getName()+ " is defeated");
+                break;}
+            
+               
+                
+                 }
+                 
+               
+                
+                }
+    
+        }
+
+public static void Saving(player p, String Offensiveitem, String defensiveitem,int health){
+    try{
+        BufferedWriter writer = new BufferedWriter(new FileWriter("CharacterProperties.txt"));
+        writer.write(p.getName());
+        writer.write("\n Class Chosen = "+p.getType());
+        writer.write("\n Offensive Item = "+Offensiveitem);
+        writer.write("\n Defensive item = "+defensiveitem);
+        writer.write("\n Health = "+p.gethealth());
+        
+        writer.close();
+        System.out.println("*Info has been Saved*");
+    }
+    catch(IOException exc){
+        exc.printStackTrace();
+    }
+}
+
+
+       
+    }
+
+
+
+
+
+
+
+class ClassType {
+    int health;
+    String weapon;
+    String defense;
+    int specialdamage;
+    
+    public ClassType(int Health, String Weapon, String Defense , int specialdamage){
+        this.health=Health;
+        this.weapon=Weapon;
+        this.defense=Defense;
+        this.specialdamage=specialdamage;
+    }
+    
+    public int getHealth(){
+        return this.health;
+    }
+    
+    public String getWeapon(){
+        return this.weapon;
+    }
+    public String getdefense(){
+        return this.defense;
+    }
+    public int getSpecialdamage(){
+        return this.specialdamage;
+    }
+    public String showweaponitem(String weapon){
+        return this.weapon=weapon;
+    }
+    public String showdefenceitem(String defense){
+        return this.defense=defense;
+    }
+    }
+    
+    class Wizard extends ClassType {
+
+        public Wizard(int Health, String Weapon, String defense, int SpecialDamage){
+         super(Health, Weapon, defense, SpecialDamage);
+    }
+    }
+     class Knight extends ClassType {
+        int specialdamage;
+    public Knight(int Health, String Weapon, String Defense, int SpecialDamage){
+    super(Health, Weapon, Defense, SpecialDamage);
+    
+    }
+    }
+    class Archer extends ClassType {
+        public Archer(int Health, String Weapon, String defense, int SpecialDamage){
+            super(Health, Weapon, defense, SpecialDamage);
+            
+            }
+    }
+    
+    
+
+    class player   {
+        String Name;
+        String Type;
+        int health;
+        int specialdamage;
+        String deathmessage;
+
+
+        player( String name, String type,int health,int specialdamage){
+       this.Name = name;
+       this.Type=type;
+       this.health=health;
+       this.specialdamage=specialdamage;
+        }
+        public String getName(){
+            return this.Name;
+        }
+        public String getType(){
+            return this.Type;
+        }
+        public int gethealth(){
+            return this.health;
+        }
+        public int getSpecialdamage(){
+            return this.specialdamage;
+        }
+        public int takeDamage(int damage){
+           this.health -=damage;
+           return this.health;
+        }
+        public int attack(){
+            return this.specialdamage;
+        
+        }
+      public  void deathmessage(){
+        System.out.println("our hero has died");
+       
+      }
+
+
+
+    }
+
+    class Dungeons{
+        int NumberofDoors,numberOfMonsters;
+Dungeons(int NumberofDoors, int numberOfMonsters){
+    this.NumberofDoors=NumberofDoors;
+    this.numberOfMonsters=numberOfMonsters;
+}
+public int getNumberofDoors(){
+    return this.NumberofDoors;
+
+}
+public int getnumberofMonsters(){
+    return this.numberOfMonsters;
+}
+    }
+
+   
+    class Monsters{
+        int health,damage;
+        String typeOfWeapon,monsterName;
+   Monsters(int health, int damage,String typeOfWeapon, String monsterName){
+this.health=health;
+this.damage=damage;
+this.typeOfWeapon = typeOfWeapon;
+this.monsterName=monsterName;
+   }
+   public int getMonsterHealth(){
+    return this.health;
+   }
+   public int getMonsterDamage(){
+    return this.damage;
+   }
+   public String gettypeOfWeapon(){
+    return this.typeOfWeapon;
+   }
+   public int getMonsterHurt(int damage){
+     this.health-=damage;
+     return this.health;
+   }
+   public int getMonsterAttack(){
+    return this.damage;
+   }
+   public String getMonsterNAme(){
+    return this.monsterName;
+   }
+    }
+
+
+
+    
