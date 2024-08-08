@@ -1,0 +1,5 @@
+The "Queen In Yellow" was my first ever true group (but actually solo) project that I have ever made. 
+It is a simple text based code that I had to first made a rough draft into a sheet of paper and realized how big it can be so I had to shorten it down to so that I can get the chance to explain the
+concepts. 
+
+The code itself can be improved but it was my first ever project to cut some slack over here :)
