@@ -1,0 +1,102 @@
+🔹 1. Pong (Classic)
+What you’ll learn:
+
+2D physics (basic)
+
+Input handling (player movement)
+
+Collision detection
+
+Score tracking
+
+Simple AI (for single-player)
+
+Why it's good:
+Very simple mechanics, easy to implement and expand on (like adding sound or power-ups).
+
+🔹 2. Breakout / Brick Breaker
+What you’ll learn:
+
+Instancing scenes (for the bricks)
+
+Signals (when ball hits a brick)
+
+Ball movement and physics
+
+Game states (win/lose)
+
+Why it's good:
+Slightly more complex than Pong but still manageable, and it introduces object management and instancing.
+
+🔹 3. Top-down Collecting Game
+(E.g., player moves around to collect coins/stars) What you’ll learn:
+
+Tilemaps (optional)
+
+Input movement
+
+Collision detection
+
+UI updates (score counter)
+
+Signals and Area2D
+
+Why it's good:
+You’ll start to understand player movement in a 2D space and how to build simple objectives.
+
+🔹 4. Platformer (Mario-style)
+What you’ll learn:
+
+KinematicBody2D / CharacterBody2D
+
+Gravity & jumping logic
+
+AnimationPlayer or AnimatedSprite2D
+
+Tilemaps for levels
+
+Traps, enemies, collectibles
+
+Why it's good:
+This one’s a bit more intermediate but still very doable. You’ll learn how to handle physics and character mechanics.
+
+🔹 5. Clicker / Idle Game
+What you’ll learn:
+
+GUI elements
+
+Buttons and signals
+
+Resource management (like a currency)
+
+Basic logic for upgrades
+
+Why it's good:
+No physics, no complex movement — pure logic and UI work. A great intro to game logic and UI systems.
+
+🔹 6. Memory Match / Card Flip Game
+What you’ll learn:
+
+Scene instancing
+
+Shuffling/randomization
+
+Matching logic
+
+Simple animations or flip effects
+
+Game restart and state management
+
+Why it's good:
+It’s fun and teaches you about game state, user interaction, and tracking object data.
+
+🔹 Bonus: "Dodge the Creeps" (Official Godot Tutorial)
+Godot's official tutorial game where you:
+
+Move around to avoid enemies
+
+Track score over time
+
+Learn about timers, spawning, and signals
+
+📌 Tutorial link: It's in the official Godot docs and YouTube channel — super beginner friendly.
