@@ -1,0 +1,179 @@
+🗺️ PONG ROADMAP (Godot + GDScript)
+✅ STEP 1: Set Up Your Godot Project
+Create a new 2D project in Godot.
+
+Make a new scene called Main.tscn.
+
+Set up a Node2D as the root.
+
+✅ Skills you learn:
+
+Godot project structure
+
+Scene creation
+
+Node types
+
+✅ STEP 2: Add the Ball
+Add a CharacterBody2D or Area2D node (for the ball).
+
+Add a Sprite2D and CollisionShape2D as children.
+
+Give it a circle sprite and a collision shape.
+
+✅ Skills you learn:
+
+Using nodes and children
+
+Setting up sprites and collisions
+
+✅ STEP 3: Make the Ball Move
+Attach a script to the ball.
+
+Use a Vector2 for direction.
+
+Move the ball using _physics_process(delta).
+
+gdscript
+Copy
+Edit
+var velocity = Vector2(200, 150)
+
+func _physics_process(delta):
+    position += velocity * delta
+✅ Skills you learn:
+
+Movement logic
+
+Delta time
+
+Vectors
+
+✅ STEP 4: Add Walls
+Add StaticBody2D or CollisionPolygon2D nodes to make top and bottom walls.
+
+Add collision shapes so the ball bounces off.
+
+✅ Skills you learn:
+
+Static bodies
+
+Collision handling
+
+✅ STEP 5: Bounce the Ball
+Detect collision and reverse ball direction on Y axis when it hits top/bottom.
+
+gdscript
+Copy
+Edit
+if position.y <= 0 or position.y >= screen_height:
+    velocity.y *= -1
+✅ Skills you learn:
+
+If statements
+
+Simple physics response
+
+✅ STEP 6: Add Player Paddles
+Create two CharacterBody2D nodes for paddles.
+
+Add Sprite2D and CollisionShape2D to each.
+
+Position them on the left and right.
+
+✅ Skills you learn:
+
+More node setup
+
+Positioning elements manually
+
+✅ STEP 7: Move Paddles with Input
+Attach a script to each paddle.
+
+Use Input.is_action_pressed("ui_up") / "ui_down".
+
+gdscript
+Copy
+Edit
+func _physics_process(delta):
+    var direction = 0
+    if Input.is_action_pressed("ui_up"):
+        direction -= 1
+    if Input.is_action_pressed("ui_down"):
+        direction += 1
+
+    position.y += direction * speed * delta
+✅ Skills you learn:
+
+Input handling
+
+Player movement
+
+✅ STEP 8: Make Ball Bounce Off Paddles
+Use CollisionShape2D or body_entered signal.
+
+When ball hits a paddle, reverse X direction:
+
+gdscript
+Copy
+Edit
+velocity.x *= -1
+✅ Skills you learn:
+
+Collision detection
+
+Signal use (optional)
+
+✅ STEP 9: Score System
+Add Label nodes to show score for each player.
+
+When the ball goes off-screen (left or right), update the score and reset the ball.
+
+gdscript
+Copy
+Edit
+if position.x < 0:
+    player2_score += 1
+    reset_ball()
+
+if position.x > screen_width:
+    player1_score += 1
+    reset_ball()
+✅ Skills you learn:
+
+Score tracking
+
+Ball reset logic
+
+✅ STEP 10: Polish (Optional)
+Add sounds: paddle hit, score, wall bounce.
+
+Add countdown before ball moves.
+
+Add win screen or restart button.
+
+Add simple AI to control 1 paddle.
+
+✅ Skills you learn:
+
+UI design
+
+Audio
+
+Game states
+
+🎯 Final Result: A fully working Pong clone!
+You'll understand:
+
+Player input
+
+Movement and physics
+
+Collision detection
+
+Scene/node structure
+
+Simple scripting and signals
+
+Game UI
+
